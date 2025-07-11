@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin Server Minecraft</title>
+    <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Product Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #ffffff;
+            flex-wrap: wrap;
+            gap: 30px;
+            background: linear-gradient(to right, #0a7e8c, #08a392);
+            background-size: 200% 200%;
+            animation: background-motion 5s infinite alternate;
+        }
+
+        @keyframes background-motion {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .server-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7); /* Shadow with background color */
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(75px);
+            -webkit-backdrop-filter: blur(75px);
+            animation: shadow-motion 5s infinite alternate;
+        }
+
+        @keyframes shadow-motion {
+            0% { box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7); }
+            100% { box-shadow: 0 8px 30px 0 rgba(8, 163, 146, 0.7); } /* Slightly different shadow color for animation */
+        }
+
+        .server-container h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .server-info p {
+            margin: 12px 0;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .server-info p strong {
+            font-weight: 500;
+            margin-right: 10px;
+            color: #d1d1d1;
+        }
+
+        .motd {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            font-style: italic;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .copy-ip-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .copy-ip-btn:hover {
+            background-color: #ddd;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="server-container">
+        <h2>Server Thử Nghiệm</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>Server Thử Nghiệm</span></p>
+            <p><strong>IP Server:</strong> <span>test.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>45 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>5 / 50</span></p>
+        </div>
+        <p class="motd">Chào mừng đến với server thử nghiệm của chúng tôi!</p>
+        <button class="copy-ip-btn" onclick="copyIP('test.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>Server SMP</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>Awesome SMP</span></p>
+            <p><strong>IP Server:</strong> <span>play.yoursmp.com</span></p>
+            <p><strong>Ping:</strong> <span>50 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>15 / 100</span></p>
+        </div>
+        <p class="motd">Chào mừng đến với Server SMP của chúng tôi!</p>
+        <button class="copy-ip-btn" onclick="copyIP('play.yoursmp.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>BoxPVP 1.9+</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>BoxPVP Warriors</span></p>
+            <p><strong>IP Server:</strong> <span>boxpvp.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>62 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>45 / 200</span></p>
+        </div>
+        <p class="motd">Tham gia đấu trường BoxPVP 1.9+!</p>
+        <button class="copy-ip-btn" onclick="copyIP('boxpvp.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>BoxPVP 1.8.x</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>Classic BoxPVP</span></p>
+            <p><strong>IP Server:</strong> <span>legacy.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>55 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>30 / 150</span></p>
+        </div>
+        <p class="motd">Trải nghiệm BoxPVP 1.8.x kinh điển!</p>
+        <button class="copy-ip-btn" onclick="copyIP('legacy.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <script>
+        function copyIP(ip) {
+            navigator.clipboard.writeText(ip).then(function() {
+                alert('Đã sao chép IP: ' + ip);
+            }, function(err) {
+                alert('Không thể sao chép IP. Vui lòng thử lại.');
+            });
+        }
+    </script>
+
+</body>
+</html>
