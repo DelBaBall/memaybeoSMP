@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin Server Minecraft</title>
+    <title>Me May Beo SMP</title>
     <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
     <style>
         body {
@@ -92,9 +92,7 @@
 
         .copy-ip-btn {
             color: #ffffff;
-            /* Đặt nền trong suốt */
             background: transparent; 
-            /* Đảm bảo không có viền */
             border: none; 
             padding: 12px;
             width: 100%;
@@ -104,14 +102,12 @@
             cursor: pointer;
             margin-top: 20px;
             transition: transform 0.2s ease;
-            
             box-shadow: none; 
             animation: none;
         }
 
         .copy-ip-btn:hover {
             transform: scale(1.03);
-            /* Thêm lại hiệu ứng nền khi hover nếu muốn */
             background: linear-gradient(to right, #0a7e8c, #08a392);
             background-size: 200% 200%;
             animation: background-motion 5s infinite alternate;
@@ -127,55 +123,11 @@
 </head>
 <body>
 
-    <div class="server-container">
-        <h2>Server Thử Nghiệm</h2>
-        <div class="server-info">
-            <p><strong>Tên Server:</strong> <span>Server Thử Nghiệm</span></p>
-            <p><strong>IP Server:</strong> <span>test.yourserver.com</span></p>
-            <p><strong>Ping:</strong> <span>45 ms</span></p>
-            <p><strong>Người chơi online:</strong> <span>5 / 50</span></p>
+    <div id="servers-container-wrapper">
         </div>
-        <p class="motd">Chào mừng đến với server thử nghiệm của chúng tôi!</p>
-        <button class="copy-ip-btn" onclick="copyIP('test.yourserver.com')">Sao chép IP</button>
-    </div>
-
-    <div class="server-container">
-        <h2>Server SMP</h2>
-        <div class="server-info">
-            <p><strong>Tên Server:</strong> <span>Awesome SMP</span></p>
-            <p><strong>IP Server:</strong> <span>play.yoursmp.com</span></p>
-            <p><strong>Ping:</strong> <span>50 ms</span></p>
-            <p><strong>Người chơi online:</strong> <span>15 / 100</span></p>
-        </div>
-        <p class="motd">Chào mừng đến với Server SMP của chúng tôi!</p>
-        <button class="copy-ip-btn" onclick="copyIP('play.yoursmp.com')">Sao chép IP</button>
-    </div>
-
-    <div class="server-container">
-        <h2>BoxPVP 1.9+</h2>
-        <div class="server-info">
-            <p><strong>Tên Server:</strong> <span>BoxPVP Warriors</span></p>
-            <p><strong>IP Server:</strong> <span>boxpvp.yourserver.com</span></p>
-            <p><strong>Ping:</strong> <span>62 ms</span></p>
-            <p><strong>Người chơi online:</strong> <span>45 / 200</span></p>
-        </div>
-        <p class="motd">Tham gia đấu trường BoxPVP 1.9+!</p>
-        <button class="copy-ip-btn" onclick="copyIP('boxpvp.yourserver.com')">Sao chép IP</button>
-    </div>
-
-    <div class="server-container">
-        <h2>BoxPVP 1.8.x</h2>
-        <div class="server-info">
-            <p><strong>Tên Server:</strong> <span>Classic BoxPVP</span></p>
-            <p><strong>IP Server:</strong> <span>legacy.yourserver.com</span></p>
-            <p><strong>Ping:</strong> <span>55 ms</span></p>
-            <p><strong>Người chơi online:</strong> <span>30 / 150</span></p>
-        </div>
-        <p class="motd">Trải nghiệm BoxPVP 1.8.x kinh điển!</p>
-        <button class="copy-ip-btn" onclick="copyIP('legacy.yourserver.com')">Sao chép IP</button>
-    </div>
 
     <script>
+        // Hàm sao chép IP
         function copyIP(ip) {
             navigator.clipboard.writeText(ip).then(function() {
                 alert('Đã sao chép IP: ' + ip);
@@ -183,6 +135,97 @@
                 alert('Không thể sao chép IP. Vui lòng thử lại.');
             });
         }
+
+        // Hàm fetch thông tin server từ API
+        async function fetchServerInfo(ip) {
+            try {
+                const response = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}`);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error(`Lỗi khi lấy thông tin server ${ip}:`, error);
+                return null;
+            }
+        }
+
+        // Hàm tạo và cập nhật server container
+        async function createServerContainer(serverData) {
+            const containerWrapper = document.getElementById('servers-container-wrapper');
+
+            const serverDiv = document.createElement('div');
+            serverDiv.className = 'server-container';
+
+            const serverName = serverData.name || 'Server không xác định';
+            const serverIP = serverData.ip || 'Không có IP';
+            const ping = serverData.ping !== undefined ? `${serverData.ping} ms` : 'Đang cập nhật...';
+            const playersOnline = serverData.players ? `${serverData.players.online} / ${serverData.players.max}` : 'Đang cập nhật...';
+            const motd = serverData.motd && serverData.motd.clean ? serverData.motd.clean.join('<br>') : 'Chào mừng đến với server!';
+
+            serverDiv.innerHTML = `
+                <h2>${serverName}</h2>
+                <div class="server-info">
+                    <p><strong>IP Server:</strong> <span>${serverIP}</span></p>
+                    <p><strong>Ping:</strong> <span>${ping}</span></p>
+                    <p><strong>Người chơi online:</strong> <span>${playersOnline}</span></p>
+                </div>
+                <p class="motd">${motd}</p>
+                <button class="copy-ip-btn" onclick="copyIP('${serverIP}')">Sao chép IP</button>
+            `;
+            containerWrapper.appendChild(serverDiv);
+        }
+        
+        // Hàm chính để đọc file IP và cập nhật giao diện
+        async function loadServers() {
+            try {
+                // Đọc file server_ips.txt
+                const response = await fetch('server_ips.txt');
+                const text = await response.text();
+                const ips = text.split('\n').map(ip => ip.trim()).filter(ip => ip !== '');
+
+                // Xóa các container cũ (nếu có)
+                const containerWrapper = document.getElementById('servers-container-wrapper');
+                containerWrapper.innerHTML = '';
+
+                // Lặp qua từng IP và lấy thông tin server
+                for (const ip of ips) {
+                    const serverInfo = await fetchServerInfo(ip);
+                    if (serverInfo) {
+                        // Thêm tên server tùy chỉnh nếu có trong API hoặc đặt mặc định
+                        const customServerName = serverInfo.hostname || ip; 
+                        
+                        // Cấu trúc dữ liệu server để dễ dàng truyền vào hàm tạo container
+                        const dataForContainer = {
+                            name: customServerName,
+                            ip: ip,
+                            ping: serverInfo.online ? serverInfo.latency : 'Offline', // Sử dụng latency nếu online
+                            players: serverInfo.players,
+                            motd: serverInfo.motd
+                        };
+                        createServerContainer(dataForContainer);
+                    } else {
+                        // Tạo container cho server offline hoặc lỗi
+                        const offlineData = {
+                            name: `Server ${ip}`,
+                            ip: ip,
+                            ping: 'Không thể kết nối',
+                            players: { online: 0, max: 0 },
+                            motd: 'Server hiện không khả dụng.'
+                        };
+                        createServerContainer(offlineData);
+                    }
+                }
+            } catch (error) {
+                console.error('Lỗi khi đọc file server_ips.txt hoặc xử lý server:', error);
+                const containerWrapper = document.getElementById('servers-container-wrapper');
+                containerWrapper.innerHTML = '<p style="color: red; text-align: center; width: 100%;">Không thể tải thông tin server. Vui lòng kiểm tra file server_ips.txt hoặc kết nối mạng.</p>';
+            }
+        }
+
+        // Chạy hàm loadServers khi trang được tải
+        document.addEventListener('DOMContentLoaded', loadServers);
+
+        // Tự động làm mới thông tin mỗi 60 giây (tùy chọn)
+        setInterval(loadServers, 60000); 
     </script>
 
 </body>
