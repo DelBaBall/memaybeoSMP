@@ -17,9 +17,7 @@
             color: #ffffff;
             flex-wrap: wrap;
             gap: 30px;
-            background: linear-gradient(to right, #0a7e8c, #08a392);
-            background-size: 200% 200%;
-            animation: background-motion 5s infinite alternate;
+            background: #444444; /* A dark gray color */
         }
 
         @keyframes background-motion {
@@ -28,16 +26,18 @@
         }
 
         .server-container {
-            background-color: rgba(0, 0, 0, 0); /* Alpha = 0, nền trong suốt hoàn toàn */
+            /* Background color matches the initial shadow of the copy IP button */
+            background-color: rgba(10, 126, 140, 0.7); 
             padding: 25px 35px;
             border-radius: 15px;
             box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7);
             width: 100%;
             max-width: 400px;
-            backdrop-filter: blur(75px);
-            -webkit-backdrop-filter: blur(75px);
+            backdrop-filter: none; /* Removed as background-color is now solid */
+            -webkit-backdrop-filter: none; /* Removed as background-color is now solid */
             animation: shadow-motion 5s infinite alternate;
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Thêm viền nhẹ để dễ nhìn hơn */
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            color: #ffffff; /* Ensure text inside is readable */
         }
 
         @keyframes shadow-motion {
@@ -50,8 +50,9 @@
             margin-bottom: 20px;
             font-size: 1.8em;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Adjusted border color for better contrast */
             padding-bottom: 15px;
+            color: #ffffff; /* Ensure heading is readable */
         }
 
         .server-info p {
@@ -64,7 +65,11 @@
         .server-info p strong {
             font-weight: 500;
             margin-right: 10px;
-            color: #d1d1d1;
+            color: #ffffff; /* Ensure bold text is readable */
+        }
+
+        .server-info p span {
+            color: #e0e0e0; /* Slightly lighter color for regular info text */
         }
 
         .motd {
@@ -77,7 +82,7 @@
         }
 
         .copy-ip-btn {
-            color: #ffffff; /* Đổi màu chữ thành trắng */
+            color: #ffffff;
             border: none;
             padding: 12px;
             width: 100%;
@@ -88,83 +93,6 @@
             margin-top: 20px;
             transition: transform 0.2s ease;
             
-            /* Áp dụng nền và chuyển động cho nút */
             background: linear-gradient(to right, #0a7e8c, #08a392);
-            background-size: 200% 200%;
-            animation: background-motion 5s infinite alternate;
-        }
-
-        .copy-ip-btn:hover {
-            transform: scale(1.03); /* Hiệu ứng phóng to khi di chuột */
-        }
-
-        @media (max-width: 900px) {
-            body {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="server-container">
-        <h2>Server Thử Nghiệm</h2>
-        <div class="server-info">
-            <p><strong>Tên Server:</strong> <span>Server Thử Nghiệm</span></p>
-            <p><strong>IP Server:</strong> <span>test.yourserver.com</span></p>
-            <p><strong>Ping:</strong> <span>45 ms</span></p>
-            <p><strong>Người chơi online:</strong> <span>5 / 50</span></p>
-        </div>
-        <p class="motd">Chào mừng đến với server thử nghiệm của chúng tôi!</p>
-        <button class="copy-ip-btn" onclick="copyIP('test.yourserver.com')">Sao chép IP</button>
-    </div>
-
-    <div class="server-container">
-        <h2>Server SMP</h2>
-        <div class="server-info">
-            <p><strong>Tên Server:</strong> <span>Awesome SMP</span></p>
-            <p><strong>IP Server:</strong> <span>play.yoursmp.com</span></p>
-            <p><strong>Ping:</strong> <span>50 ms</span></p>
-            <p><strong>Người chơi online:</strong> <span>15 / 100</span></p>
-        </div>
-        <p class="motd">Chào mừng đến với Server SMP của chúng tôi!</p>
-        <button class="copy-ip-btn" onclick="copyIP('play.yoursmp.com')">Sao chép IP</button>
-    </div>
-
-    <div class="server-container">
-        <h2>BoxPVP 1.9+</h2>
-        <div class="server-info">
-            <p><strong>Tên Server:</strong> <span>BoxPVP Warriors</span></p>
-            <p><strong>IP Server:</strong> <span>boxpvp.yourserver.com</span></p>
-            <p><strong>Ping:</strong> <span>62 ms</span></p>
-            <p><strong>Người chơi online:</strong> <span>45 / 200</span></p>
-        </div>
-        <p class="motd">Tham gia đấu trường BoxPVP 1.9+!</p>
-        <button class="copy-ip-btn" onclick="copyIP('boxpvp.yourserver.com')">Sao chép IP</button>
-    </div>
-
-    <div class="server-container">
-        <h2>BoxPVP 1.8.x</h2>
-        <div class="server-info">
-            <p><strong>Tên Server:</strong> <span>Classic BoxPVP</span></p>
-            <p><strong>IP Server:</strong> <span>legacy.yourserver.com</span></p>
-            <p><strong>Ping:</strong> <span>55 ms</span></p>
-            <p><strong>Người chơi online:</strong> <span>30 / 150</span></p>
-        </div>
-        <p class="motd">Trải nghiệm BoxPVP 1.8.x kinh điển!</p>
-        <button class="copy-ip-btn" onclick="copyIP('legacy.yourserver.com')">Sao chép IP</button>
-    </div>
-
-    <script>
-        function copyIP(ip) {
-            navigator.clipboard.writeText(ip).then(function() {
-                alert('Đã sao chép IP: ' + ip);
-            }, function(err) {
-                alert('Không thể sao chép IP. Vui lòng thử lại.');
-            });
-        }
-    </script>
-
-</body>
-</html>
+            background-size:
+                
