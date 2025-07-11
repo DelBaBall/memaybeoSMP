@@ -9,15 +9,17 @@
         body {
             font-family: 'Product Sans', sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Sắp xếp nội dung theo cột */
+            justify-content: flex-start; /* Nội dung bắt đầu từ phía trên */
             align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            padding-bottom: 80px; /* Thêm padding dưới để tránh nội dung bị che bởi menu */
             color: #ffffff;
             flex-wrap: wrap;
             gap: 30px;
-            background: #444444; /* A dark gray color */
+            background: #444444; /* Màu xám của body */
         }
 
         @keyframes background-motion {
@@ -94,5 +96,170 @@
             transition: transform 0.2s ease;
             
             background: linear-gradient(to right, #0a7e8c, #08a392);
-            background-size:
-                
+            background-size: 200% 200%;
+            animation: background-motion 5s infinite alternate;
+            
+            box-shadow: 0 4px 15px 0 rgba(10, 126, 140, 0.7);
+            animation: button-shadow-motion 5s infinite alternate;
+        }
+
+        .copy-ip-btn:hover {
+            transform: scale(1.03);
+        }
+
+        @keyframes button-shadow-motion {
+            0% { box-shadow: 0 4px 15px 0 rgba(10, 126, 140, 0.7); }
+            100% { box-shadow: 0 4px 15px 0 rgba(8, 163, 146, 0.7); }
+        }
+
+        /* Styles for the bottom navigation bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #555555; /* Đã thay đổi màu nền để sáng hơn body */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5); /* Tăng cường shadow để tách biệt rõ hơn */
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.8em;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item i {
+            font-size: 1.5em;
+            margin-bottom: 3px;
+        }
+
+        .nav-item span {
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .nav-item.active {
+            color: #0a7e8c;
+        }
+
+        .nav-item:hover {
+            color: #08a392;
+        }
+
+        .nav-item-center {
+            background-color: #0a7e8c;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffffff;
+            position: relative;
+            top: -10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-item-center:hover {
+            background-color: #08a392;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="server-container">
+        <h2>Server Thử Nghiệm</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>Server Thử Nghiệm</span></p>
+            <p><strong>IP Server:</strong> <span>test.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>45 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>5 / 50</span></p>
+        </div>
+        <p class="motd">Chào mừng đến với server thử nghiệm của chúng tôi!</p>
+        <button class="copy-ip-btn" onclick="copyIP('test.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>Server SMP</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>Awesome SMP</span></p>
+            <p><strong>IP Server:</strong> <span>play.yoursmp.com</span></p>
+            <p><strong>Ping:</strong> <span>50 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>15 / 100</span></p>
+        </div>
+        <p class="motd">Chào mừng đến với Server SMP của chúng tôi!</p>
+        <button class="copy-ip-btn" onclick="copyIP('play.yoursmp.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>BoxPVP 1.9+</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>BoxPVP Warriors</span></p>
+            <p><strong>IP Server:</strong> <span>boxpvp.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>62 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>45 / 200</span></p>
+        </div>
+        <p class="motd">Tham gia đấu trường BoxPVP 1.9+!</p>
+        <button class="copy-ip-btn" onclick="copyIP('boxpvp.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>BoxPVP 1.8.x</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>Classic BoxPVP</span></p>
+            <p><strong>IP Server:</strong> <span>legacy.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>55 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>30 / 150</span></p>
+        </div>
+        <p class="motd">Trải nghiệm BoxPVP 1.8.x kinh điển!</p>
+        <button class="copy-ip-btn" onclick="copyIP('legacy.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-item">
+            <span>🏠</span> </a>
+        <a href="#" class="nav-item active">
+            <span>🔖</span> </a>
+        <div class="nav-item-center">
+            +
+        </div>
+        <a href="#" class="nav-item">
+            <span>🔍</span> </a>
+        <a href="#" class="nav-item">
+            <span>📥</span> </a>
+    </div>
+
+    <script>
+        function copyIP(ip) {
+            navigator.clipboard.writeText(ip).then(function() {
+                alert('Đã sao chép IP: ' + ip);
+            }, function(err) {
+                alert('Không thể sao chép IP. Vui lòng thử lại.');
+            });
+        }
+    </script>
+
+</body>
+</html>
