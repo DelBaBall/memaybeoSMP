@@ -37,14 +37,12 @@
             
             /* Sửa đổi đổ bóng để hiển thị cả hai màu */
             box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7), 0 8px 30px 0 rgba(8, 163, 146, 0.7);
-            /* Xóa hoặc sửa đổi animation shadow-motion nếu không muốn nó thay đổi màu */
             animation: background-motion 5s infinite alternate, shadow-motion 5s infinite alternate; /* Áp dụng cả hai animation */
             
             width: 100%;
             max-width: 400px;
             backdrop-filter: none; /* No blur needed with solid gradient background */
             -webkit-backdrop-filter: none;
-            /* Loại bỏ border */
             border: none; 
             color: #ffffff; /* Ensure text inside is readable */
         }
@@ -94,7 +92,10 @@
 
         .copy-ip-btn {
             color: #ffffff;
-            border: none;
+            /* Đặt nền trong suốt */
+            background: transparent; 
+            /* Đảm bảo không có viền */
+            border: none; 
             padding: 12px;
             width: 100%;
             border-radius: 8px;
@@ -104,17 +105,16 @@
             margin-top: 20px;
             transition: transform 0.2s ease;
             
-            /* Apply the same gradient and animation for consistency */
-            background: linear-gradient(to right, #0a7e8c, #08a392);
-            background-size: 200% 200%;
-            animation: background-motion 5s infinite alternate; /* Use existing background-motion */
-            
             box-shadow: none; 
             animation: none;
         }
 
         .copy-ip-btn:hover {
             transform: scale(1.03);
+            /* Thêm lại hiệu ứng nền khi hover nếu muốn */
+            background: linear-gradient(to right, #0a7e8c, #08a392);
+            background-size: 200% 200%;
+            animation: background-motion 5s infinite alternate;
         }
 
         @media (max-width: 900px) {
