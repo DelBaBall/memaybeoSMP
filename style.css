@@ -1,0 +1,36 @@
+/* ... (các CSS hiện có của bạn) ... */
+
+.server-card p {
+    margin: 8px 0;
+    font-size: 1.1em;
+    position: relative; /* Quan trọng để áp dụng backdrop-filter cho span */
+}
+
+.server-card p span {
+    font-weight: bold;
+    color: #81d4fa; /* Màu xanh nhạt hơn */
+}
+
+/* Thêm quy tắc CSS cho phần MOTD */
+.server-motd {
+    display: inline-block; /* Để áp dụng padding và background đúng cách */
+    padding: 5px 10px; /* Padding nhẹ cho nền */
+    border-radius: 5px; /* Bo góc nhẹ cho nền */
+    background-color: rgba(0, 0, 0, 0.25); /* Nền đen 25% trong suốt */
+    backdrop-filter: blur(3px); /* Hiệu ứng làm mờ nhẹ, giá trị 3px tương đương khoảng 25% */
+    -webkit-backdrop-filter: blur(3px); /* Hỗ trợ Safari */
+    
+    /* Đổ bóng cho chữ */
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.8), /* Đổ bóng chính */
+        -1px -1px 2px rgba(0, 0, 0, 0.8),
+        1px -1px 2px rgba(0, 0, 0, 0.8),
+        -1px 1px 2px rgba(0, 0, 0, 0.8);
+    
+    line-height: 1.4; /* Tăng chiều cao dòng nếu MOTD có nhiều dòng */
+    text-align: center; /* Căn giữa chữ */
+    width: 100%; /* Đảm bảo span chiếm đủ chiều rộng để căn giữa */
+    box-sizing: border-box; /* Đảm bảo padding không làm tràn width */
+}
+
+/* ... (các CSS hiện có của bạn) ... */
