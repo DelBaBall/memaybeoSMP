@@ -3,182 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin Server Minecraft của tôi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Ngăn chặn thanh cuộn ngang */
-            height: 200vh; /* Tạo đủ không gian để cuộn và thấy hiệu ứng parallax */
-            color: #ffffff;
-            font-family: 'Product Sans', sans-serif;
-        }
-
-        /* Phần tử chứa hình nền và hiệu ứng blur */
-        .parallax-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://raw.githubusercontent.com/MongusOrg/LiquidBouncePlusPlus/master/images/background.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -1; /* Đảm bảo nó nằm dưới nội dung */
-            filter: blur(0px); /* Mặc định không mờ, sẽ được điều chỉnh bằng JS */
-            transition: filter 0.1s ease-out; /* Hiệu ứng chuyển tiếp mượt mà cho blur */
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 1; /* Đảm bảo nội dung nằm trên nền */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Đảm bảo container nằm giữa trang đầu tiên */
-            padding: 20px; /* Thêm padding để nội dung không dính vào mép */
-            box-sizing: border-box; /* Bao gồm padding trong chiều rộng/cao */
-        }
-
-        .container {
-            background-color: rgba(0, 0, 0, 0.5); /* Nền đen trong suốt (0.5 độ trong suốt) */
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
-            width: 90%;
-            backdrop-filter: blur(5px); /* Hiệu ứng blur cho chính container, làm mờ nền phía sau nó */
-            -webkit-backdrop-filter: blur(5px); /* Hỗ trợ Safari */
-        }
-
-        h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), /* Bóng trắng mờ lớn hơn */
-                         0 0 30px rgba(255, 255, 255, 0.6),
-                         0 0 40px rgba(255, 255, 255, 0.4);
-        }
-
-        p {
-            font-size: 1.5em;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Bóng trắng mờ cho p */
-        }
-
-        .server-info {
-            list-style: none;
-            padding: 0;
-            margin-top: 30px;
-        }
-
-        .server-info li {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* Bóng trắng mờ cho li */
-        }
-
-        .highlight {
-            color: #4CAF50;
-            font-weight: bold;
-            text-shadow: 0 0 12px rgba(76, 175, 80, 0.8); /* Bóng cho highlight */
-        }
-
-        .ip-address {
-            font-size: 2em;
-            margin-top: 30px;
-            color: #FFD700;
-            background-color: rgba(60, 60, 60, 0.8);
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.9); /* Bóng cho IP */
-        }
-
-        a {
-            color: #ADD8E6;
-            text-decoration: none;
-            text-shadow: 0 0 8px rgba(173, 216, 230, 0.7); /* Bóng cho link */
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-            p, .server-info li {
-                font-size: 1.2em;
-            }
-            .ip-address {
-                font-size: 1.7em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2em;
-            }
-            p, .server-info li {
-                font-size: 1em;
-            }
-            .ip-address {
-                font-size: 1.4em;
-            }
-            .container {
-                padding: 20px;
-            }
-        }
-    </style>
+    <title>Trạng Thái Máy Chủ Minecraft</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
 </head>
 <body>
-    <div class="parallax-bg"></div>
+    <div class="background-shader"></div>
+    <div class="container">
+        <h1>TRẠNG THÁI MÁY CHỦ MINECRAFT</h1>
+        
+        <div class="server-sections">
+            <div class="server-card" id="server-thu-nghiem">
+                <h2>SERVER THỬ NGHIỆM</h2>
+                <p>IP: <span class="server-ip">Đang tải...</span></p>
+                <p>MOTD: <span class="server-motd">Đang tải...</span></p>
+                <p>Người chơi: <span class="server-players">Đang tải...</span></p>
+                <p>Phiên bản: <span class="server-version">Đang tải...</span></p>
+                <p>Ping: <span class="server-ping">Đang tải...</span>ms</p>
+            </div>
 
-    <div class="content-wrapper">
-        <div class="container">
-            <h1>Chào mừng đến với Server Minecraft của chúng tôi!</h1>
-            <p>Tham gia cùng chúng tôi để có một trải nghiệm Minecraft tuyệt vời với nhiều tính năng độc đáo và cộng đồng thân thiện.</p>
-            <p>Chúng tôi cung cấp một môi trường chơi game ổn định và sáng tạo, nơi bạn có thể xây dựng, khám phá và tương tác với những người chơi khác.</p>
+            <div class="server-card" id="server-sinh-ton">
+                <h2>SERVER SINH TỒN</h2>
+                <p>IP: <span class="server-ip">Đang tải...</span></p>
+                <p>MOTD: <span class="server-motd">Đang tải...</span></p>
+                <p>Người chơi: <span class="server-players">Đang tải...</span></p>
+                <p>Phiên bản: <span class="server-version">Đang tải...</span></p>
+                <p>Ping: <span class="server-ping">Đang tải...</span>ms</p>
+            </div>
 
-            <ul class="server-info">
-                <li><span class="highlight">Chế độ chơi:</span> Sinh tồn (Survival) & Đấu trường (Minigames)</li>
-                <li><span class="highlight">Phiên bản:</span> 1.19.4 - 1.20.1 (Hỗ trợ đa phiên bản)</li>
-                <li><span class="highlight">Bảo vệ:</span> Chống phá hoại, chống gian lận hiệu quả</li>
-                <li><span class="highlight">Cộng đồng:</span> Luôn chào đón người chơi mới, có Discord và kênh hỗ trợ riêng.</li>
-            </ul>
+            <div class="server-card" id="server-boxpvp-18">
+                <h2>BOXPVP 1.8.X</h2>
+                <p>IP: <span class="server-ip">Đang tải...</span></p>
+                <p>MOTD: <span class="server-motd">Đang tải...</span></p>
+                <p>Người chơi: <span class="server-players">Đang tải...</span></p>
+                <p>Phiên bản: <span class="server-version">Đang tải...</span></p>
+                <p>Ping: <span class="server-ping">Đang tải...</span>ms</p>
+            </div>
 
-            <p>Địa chỉ IP của Server:</p>
-            <p class="ip-address">play.yourminecraftserver.com</p> <p>Hoặc:</p>
-            <p class="ip-address">123.45.67.89:25565</p> <p>Tham gia kênh Discord của chúng tôi để cập nhật thông tin và giao lưu:</p>
-            <p><a href="https://discord.gg/yourdiscordlink" target="_blank">discord.gg/yourdiscordlink</a></p> </div>
+            <div class="server-card" id="server-boxpvp-19">
+                <h2>BOXPVP 1.9+</h2>
+                <p>IP: <span class="server-ip">Đang tải...</span></p>
+                <p>MOTD: <span class="server-motd">Đang tải...</span></p>
+                <p>Người chơi: <span class="server-players">Đang tải...</span></p>
+                <p>Phiên bản: <span class="server-version">Đang tải...</span></p>
+                <p>Ping: <span class="server-ping">Đang tải...</span>ms</p>
+            </div>
+        </div>
+
+        <div class="discord-section">
+            <p>Tham gia cộng đồng của chúng tôi trên Discord!</p>
+            <a href="YOUR_DISCORD_INVITE_LINK" target="_blank" class="discord-button">Tham gia Discord</a>
+        </div>
     </div>
 
-    <script>
-        const parallaxBg = document.querySelector('.parallax-bg');
-        const maxBlur = 10; // Giá trị blur tối đa (pixel)
-
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset;
-            const bodyHeight = document.body.offsetHeight;
-            const windowHeight = window.innerHeight;
-
-            // Tính toán phần trăm cuộn của trang
-            // Điều chỉnh để blur chỉ xảy ra khi cuộn xuống
-            let scrollPercentage = (scrollPosition / (bodyHeight - windowHeight));
-            if (scrollPercentage < 0) scrollPercentage = 0;
-            if (scrollPercentage > 1) scrollPercentage = 1;
-
-            // Áp dụng blur dựa trên vị trí cuộn
-            const blurValue = scrollPosition * (maxBlur / (windowHeight * 0.5)); // Blur tăng nhanh hơn khi cuộn
-            parallaxBg.style.filter = `blur(${Math.min(blurValue, maxBlur)}px)`;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
