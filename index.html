@@ -131,4 +131,59 @@
         <h2>Server Thử Nghiệm</h2>
         <div class="server-info">
             <p><strong>Tên Server:</strong> <span>Server Thử Nghiệm</span></p>
-            
+            <p><strong>IP Server:</strong> <span>test.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>45 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>5 / 50</span></p>
+        </div>
+        <p class="motd">Chào mừng đến với server thử nghiệm của chúng tôi!</p>
+        <button class="copy-ip-btn" onclick="copyIP('test.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>Server SMP</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>Awesome SMP</span></p>
+            <p><strong>IP Server:</strong> <span>play.yoursmp.com</span></p>
+            <p><strong>Ping:</strong> <span>50 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>15 / 100</span></p>
+        </div>
+        <p class="motd">Chào mừng đến với Server SMP của chúng tôi!</p>
+        <button class="copy-ip-btn" onclick="copyIP('play.yoursmp.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>BoxPVP 1.9+</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>BoxPVP Warriors</span></p>
+            <p><strong>IP Server:</strong> <span>boxpvp.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>62 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>45 / 200</span></p>
+        </div>
+        <p class="motd">Tham gia đấu trường BoxPVP 1.9+!</p>
+        <button class="copy-ip-btn" onclick="copyIP('boxpvp.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <div class="server-container">
+        <h2>BoxPVP 1.8.x</h2>
+        <div class="server-info">
+            <p><strong>Tên Server:</strong> <span>Classic BoxPVP</span></p>
+            <p><strong>IP Server:</strong> <span>legacy.yourserver.com</span></p>
+            <p><strong>Ping:</strong> <span>55 ms</span></p>
+            <p><strong>Người chơi online:</strong> <span>30 / 150</span></p>
+        </div>
+        <p class="motd">Trải nghiệm BoxPVP 1.8.x kinh điển!</p>
+        <button class="copy-ip-btn" onclick="copyIP('legacy.yourserver.com')">Sao chép IP</button>
+    </div>
+
+    <script>
+        function copyIP(ip) {
+            navigator.clipboard.writeText(ip).then(function() {
+                alert('Đã sao chép IP: ' + ip);
+            }, function(err) {
+                alert('Không thể sao chép IP. Vui lòng thử lại.');
+            });
+        }
+    </script>
+
+</body>
+</html>
