@@ -9,39 +9,46 @@
         body {
             font-family: 'Product Sans', sans-serif;
             display: flex;
-            flex-direction: column; /* Sắp xếp nội dung theo cột */
-            justify-content: flex-start; /* Nội dung bắt đầu từ phía trên */
-            align-items: center;
-            min-height: 100vh;
+            justify-content: center; /* Center content horizontally */
+            align-items: center;    /* Center content vertically */
+            min-height: 100vh;      /* Take full viewport height */
             margin: 0;
             padding: 20px;
-            padding-bottom: 80px; /* Thêm padding dưới để tránh nội dung bị che bởi menu */
+            /* Removed padding-bottom as no fixed footer anymore */
             color: #ffffff;
             flex-wrap: wrap;
             gap: 30px;
-            background: #444444; /* Màu xám của body */
+            background: #444444; /* Dark gray background */
+            /* Removed flex-direction: column as content is now centered */
         }
 
+        /* Animation for gradient background movement */
         @keyframes background-motion {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
 
         .server-container {
-            /* Background color matches the initial shadow of the copy IP button */
-            background-color: rgba(10, 126, 140, 0.7); 
+            /* Apply the gradient background and animation */
+            background: linear-gradient(to right, #0a7e8c, #08a392);
+            background-size: 200% 200%;
+            animation: background-motion 5s infinite alternate;
+            
             padding: 25px 35px;
             border-radius: 15px;
+            /* Apply shadow with animation matching the gradient colors */
             box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7);
+            animation: shadow-motion 5s infinite alternate; /* This needs to be applied after background-motion if they are on different properties, or combined if for the same property */
+            
             width: 100%;
             max-width: 400px;
-            backdrop-filter: none; /* Removed as background-color is now solid */
-            -webkit-backdrop-filter: none; /* Removed as background-color is now solid */
-            animation: shadow-motion 5s infinite alternate;
+            backdrop-filter: none; /* No blur needed with solid gradient background */
+            -webkit-backdrop-filter: none;
             border: 1px solid rgba(255, 255, 255, 0.1); 
             color: #ffffff; /* Ensure text inside is readable */
         }
 
+        /* Animation for the box shadow */
         @keyframes shadow-motion {
             0% { box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7); }
             100% { box-shadow: 0 8px 30px 0 rgba(8, 163, 146, 0.7); }
@@ -52,9 +59,9 @@
             margin-bottom: 20px;
             font-size: 1.8em;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Adjusted border color for better contrast */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             padding-bottom: 15px;
-            color: #ffffff; /* Ensure heading is readable */
+            color: #ffffff;
         }
 
         .server-info p {
@@ -67,20 +74,21 @@
         .server-info p strong {
             font-weight: 500;
             margin-right: 10px;
-            color: #ffffff; /* Ensure bold text is readable */
+            color: #ffffff; /* Keeping white for contrast against gradient */
         }
 
         .server-info p span {
-            color: #e0e0e0; /* Slightly lighter color for regular info text */
+            color: #e0e0e0; /* Keeping light gray for contrast against gradient */
         }
 
         .motd {
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.3); /* Keep dark for contrast with new gradient background */
             padding: 10px;
             border-radius: 8px;
             font-style: italic;
             margin-top: 20px;
             text-align: center;
+            color: #ffffff; /* Ensure text is visible */
         }
 
         .copy-ip-btn {
@@ -95,11 +103,12 @@
             margin-top: 20px;
             transition: transform 0.2s ease;
             
+            /* Apply the same gradient and animation for consistency */
             background: linear-gradient(to right, #0a7e8c, #08a392);
             background-size: 200% 200%;
-            animation: background-motion 5s infinite alternate;
+            animation: background-motion 5s infinite alternate; /* Use existing background-motion */
             
-            box-shadow: 0 4px 15px 0 rgba(10, 126, 140, 0.7);
+            box-shadow: 0 4px 15px 0 rgba(10, 126, 140, 0.7); 
             animation: button-shadow-motion 5s infinite alternate;
         }
 
@@ -107,76 +116,10 @@
             transform: scale(1.03);
         }
 
+        /* Keyframes for button shadow, consistent with general shadow-motion */
         @keyframes button-shadow-motion {
             0% { box-shadow: 0 4px 15px 0 rgba(10, 126, 140, 0.7); }
             100% { box-shadow: 0 4px 15px 0 rgba(8, 163, 146, 0.7); }
-        }
-
-        /* Styles for the bottom navigation bar */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #555555; /* Đã thay đổi màu nền để sáng hơn body */
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 60px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5); /* Tăng cường shadow để tách biệt rõ hơn */
-            z-index: 1000;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.8em;
-            padding: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-item i {
-            font-size: 1.5em;
-            margin-bottom: 3px;
-        }
-
-        .nav-item span {
-            font-size: 1.2em;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .nav-item.active {
-            color: #0a7e8c;
-        }
-
-        .nav-item:hover {
-            color: #08a392;
-        }
-
-        .nav-item-center {
-            background-color: #0a7e8c;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            font-weight: bold;
-            color: #ffffff;
-            position: relative;
-            top: -10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .nav-item-center:hover {
-            background-color: #08a392;
         }
 
         @media (max-width: 900px) {
@@ -235,20 +178,6 @@
         </div>
         <p class="motd">Trải nghiệm BoxPVP 1.8.x kinh điển!</p>
         <button class="copy-ip-btn" onclick="copyIP('legacy.yourserver.com')">Sao chép IP</button>
-    </div>
-
-    <div class="bottom-nav">
-        <a href="#" class="nav-item">
-            <span>🏠</span> </a>
-        <a href="#" class="nav-item active">
-            <span>🔖</span> </a>
-        <div class="nav-item-center">
-            +
-        </div>
-        <a href="#" class="nav-item">
-            <span>🔍</span> </a>
-        <a href="#" class="nav-item">
-            <span>📥</span> </a>
     </div>
 
     <script>
