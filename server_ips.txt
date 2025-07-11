@@ -1,0 +1,4 @@
+test.yourserver.com
+play.yoursmp.com
+boxpvp.yourserver.com
+legacy.yourserver.com
