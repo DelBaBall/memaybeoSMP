@@ -1,4 +1,4 @@
-test.yourserver.com
-play.yoursmp.com
-boxpvp.yourserver.com
-legacy.yourserver.com
+test.yourserver.com #TestServer
+play.yoursmp.com #SMP
+boxpvp.yourserver.com #PvP 1.9+
+legacy.yourserver.com #PvP 1.8.x
