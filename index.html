@@ -28,20 +28,21 @@
         }
 
         .server-container {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0); /* Alpha = 0, nền trong suốt hoàn toàn */
             padding: 25px 35px;
             border-radius: 15px;
-            box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7); /* Shadow with background color */
+            box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7);
             width: 100%;
             max-width: 400px;
             backdrop-filter: blur(75px);
             -webkit-backdrop-filter: blur(75px);
             animation: shadow-motion 5s infinite alternate;
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Thêm viền nhẹ để dễ nhìn hơn */
         }
 
         @keyframes shadow-motion {
             0% { box-shadow: 0 8px 30px 0 rgba(10, 126, 140, 0.7); }
-            100% { box-shadow: 0 8px 30px 0 rgba(8, 163, 146, 0.7); } /* Slightly different shadow color for animation */
+            100% { box-shadow: 0 8px 30px 0 rgba(8, 163, 146, 0.7); }
         }
 
         .server-container h2 {
@@ -76,8 +77,7 @@
         }
 
         .copy-ip-btn {
-            background-color: #f0f0f0;
-            color: #333;
+            color: #ffffff; /* Đổi màu chữ thành trắng */
             border: none;
             padding: 12px;
             width: 100%;
@@ -85,12 +85,17 @@
             font-size: 1em;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
             margin-top: 20px;
+            transition: transform 0.2s ease;
+            
+            /* Áp dụng nền và chuyển động cho nút */
+            background: linear-gradient(to right, #0a7e8c, #08a392);
+            background-size: 200% 200%;
+            animation: background-motion 5s infinite alternate;
         }
 
         .copy-ip-btn:hover {
-            background-color: #ddd;
+            transform: scale(1.03); /* Hiệu ứng phóng to khi di chuột */
         }
 
         @media (max-width: 900px) {
